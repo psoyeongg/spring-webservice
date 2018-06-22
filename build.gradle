@@ -7,6 +7,8 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		//추가
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
 	}
 }
 
@@ -23,6 +25,8 @@ repositories {
 	mavenCentral()
 }
 
+//Spring Boot Overriding
+ext['hibernate.version'] = '5.2.11.Final' //추가'
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
