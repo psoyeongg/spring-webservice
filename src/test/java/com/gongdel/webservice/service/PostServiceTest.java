@@ -2,6 +2,7 @@ package com.gongdel.webservice.service;
 
 import com.gongdel.webservice.domain.posts.Posts;
 import com.gongdel.webservice.domain.posts.PostsRepository;
+import com.gongdel.webservice.dto.post.PostsMainResponseDto;
 import com.gongdel.webservice.dto.post.PostsSaveRequestDto;
 import org.junit.After;
 import org.junit.Test;
@@ -9,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,5 +47,18 @@ public class PostServiceTest {
         assertThat(posts.getAuthor()).isEqualTo(dto.getAuthor());
         assertThat(posts.getContent()).isEqualTo(dto.getContent());
         assertThat(posts.getTitle()).isEqualTo(dto.getTitle());
+    }
+
+    @Test
+    public void Dto데이터가_조회된다() {
+        // when
+        List<PostsMainResponseDto> dto = postsService.findAllDesc();
+
+        // then
+       for(PostsMainResponseDto testDto: dto) {
+           System.out.println(testDto.getId());
+           System.out.println(testDto.getAuthor());
+           System.out.println(testDto.getModifiedDate());
+       }
     }
 }
