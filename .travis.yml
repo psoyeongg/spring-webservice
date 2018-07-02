@@ -24,7 +24,7 @@ notifications:
 before_deploy:
   - zip -r spring-webservice * # 현재 위치의 모든 파일을 spring-service이름으로 압축
   - mkdir -p deploy # deploy라는 디렉토리를 Travis CI가 실행 중인 위치에서 생성
-  - mv spring-webservice.zip deloy/spring-webservice.zip # springboot-webservice.zip 파일을 deploy/springboot-webservice.zip로 이동
+  - mv spring-webservice.zip deploy/spring-webservice.zip # spring-webservice.zip 파일을 deploy/springboot-webservice.zip로 이동
 
 # CodeDeploy는 저장 기능이 없습니다.
 #  그래서 Travis CI가 Build 한 결과물을 받아서 CodeDeploy가 가져갈 수 있도록 보관할 수 있는 공간이 필요합니다.
