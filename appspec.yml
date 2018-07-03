@@ -1,0 +1,6 @@
+#AWS CodeDeploy 설정
+version: 0.0 # 프로젝트 버전이 아니기 때문에, 0.0 외에 다른 버전을 사용 시 오류 발생
+os: linux
+files:
+  - source: / #S3 버킷에서 복사할 파일의 위치
+    destination: /home/ec2-user/app/travis/build/
