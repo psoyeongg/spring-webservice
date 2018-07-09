@@ -17,7 +17,7 @@ public class WebRestController {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Test
+ /*   @Test
     public void 프로필확인() {
         // when
         String profile = this.testRestTemplate.getForObject("/profile", String.class);
@@ -25,5 +25,5 @@ public class WebRestController {
         // then
         assertThat(profile).isEqualTo("local");
 
-    }
+    }*/
 }
