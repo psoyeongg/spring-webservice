@@ -53,6 +53,7 @@ public class WebRestController {
     @GetMapping("/profile")
     public String getProfile () {
         return Arrays.stream(environment.getActiveProfiles())
+                .filter(e -> ("set1".equals(e) || "set2".equals(e))) // ActiveProfiles은 real.db + set1 또는 set2가 잡힘
                 .findFirst()
                 .orElse("");
 
