@@ -1,5 +1,6 @@
 package com.gongdel.webservice.dto.post;
 
+import com.gongdel.webservice.domain.posts.PostStatus;
 import com.gongdel.webservice.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,9 +21,10 @@ public class PostsSaveRequestDto {
         this.title = title;
         this.content = content;
         this.author = author;
+
     }
 
     public Posts toEntity() {
-        return Posts.builder().title(title).content(content).author(author).build();
+        return Posts.builder().title(title).content(content).author(author).status(PostStatus.Y).build();
     }
 }

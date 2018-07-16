@@ -1,5 +1,6 @@
 package com.gongdel.webservice.domain;
 
+import com.gongdel.webservice.domain.posts.PostStatus;
 import com.gongdel.webservice.domain.posts.Posts;
 import com.gongdel.webservice.domain.posts.PostsRepository;
 import org.junit.After;
@@ -25,7 +26,7 @@ public class PostReppsitoryTest {
 
     @After
     public void cleanUp() {
-        /**
+        /*
          * 이후 테스트 코드에 영향을 끼치지 않기 위해, 테스트 메소드가 끝날 때마다 repository를 전체 비우는 코드
          */
         postsRepository.deleteAll();
@@ -59,5 +60,20 @@ public class PostReppsitoryTest {
         Posts posts = postsList.get(0);
         assertTrue(posts.getCreatedDate().isAfter(now));
         assertTrue(posts.getModifiedDate().isAfter(now));
+    }
+
+    @Test
+    public void DetailsResponseDto_세부사항() {
+        // given
+        Long id = postsRepository.save(Posts.builder().title("테스트 게시글")
+                .content("테스트 본문").author("yolip51@gmail.com").status(PostStatus.Y)
+                .build()).getId();
+
+        // when
+        Posts posts = postsRepository.findByIdAndStatus(id, PostStatus.Y);
+
+        // then
+        assertThat(posts.getId(), is(id));
+        assertThat(posts.getStatus(), is(PostStatus.Y));
     }
 }

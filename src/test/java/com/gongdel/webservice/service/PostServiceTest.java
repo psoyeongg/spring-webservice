@@ -1,7 +1,9 @@
 package com.gongdel.webservice.service;
 
+import com.gongdel.webservice.domain.posts.PostStatus;
 import com.gongdel.webservice.domain.posts.Posts;
 import com.gongdel.webservice.domain.posts.PostsRepository;
+import com.gongdel.webservice.dto.post.PostsDetailsResponseDto;
 import com.gongdel.webservice.dto.post.PostsMainResponseDto;
 import com.gongdel.webservice.dto.post.PostsSaveRequestDto;
 import org.junit.After;
@@ -46,6 +48,7 @@ public class PostServiceTest {
         Posts posts = postsRepository.findAll().get(0);
         assertThat(posts.getAuthor()).isEqualTo(dto.getAuthor());
         assertThat(posts.getContent()).isEqualTo(dto.getContent());
+        assertThat(posts.getStatus()).isEqualTo(PostStatus.Y);
         assertThat(posts.getTitle()).isEqualTo(dto.getTitle());
     }
 
@@ -60,5 +63,24 @@ public class PostServiceTest {
            System.out.println(testDto.getAuthor());
            System.out.println(testDto.getModifiedDate());
        }
+    }
+
+    @Test
+    public void Dto데이터_특정id조회() {
+        // given
+        PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
+                .author("gongdel@gmail.com")
+                .content("테스트")
+                .title("테스트 타이틀")
+                .build();
+        Long id = postsService.save(dto);
+
+        // when
+        PostsDetailsResponseDto testPost =  postsService.findByPost(id, PostStatus.Y);
+
+        // then
+        assertThat(testPost.getId()).isEqualTo(id);
+        assertThat(testPost.getContent()).isEqualTo("테스트");
+
     }
 }

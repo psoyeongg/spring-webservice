@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -28,10 +25,18 @@ public class Posts extends BaseTimeEntity {
 
     private String author;
 
+    // https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/lob-annotation.html
+    @Lob
+    private String code;
+
+    @Enumerated(EnumType.STRING)
+    private PostStatus status;
+
     @Builder
-    public Posts(String title, String content, String author) {
+    public Posts(String title, String content, String author, PostStatus status) {
         this.title = title;
         this.content = content;
         this.author = author;
+        this.status = status;
     }
 }
