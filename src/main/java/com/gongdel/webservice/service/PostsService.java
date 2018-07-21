@@ -50,6 +50,21 @@ public class PostsService {
         return responseDto;
     }
 
+    // 글 업데이트 하기
+    public PostsDetailsResponseDto updatePost(Long id, Posts posts) {
+        Posts oldPosts = postsRepository.findByIdAndStatus(id, PostStatus.Y);
+        if (oldPosts == null) {
+            throw new NotFoundException("Not Found - " + id);
+        }
+
+        oldPosts.setContent(posts.getContent());
+        oldPosts.setCode(posts.getCode());
+        oldPosts.setTitle(posts.getTitle());
+
+        PostsDetailsResponseDto newPosts = new PostsDetailsResponseDto(oldPosts);
+
+        return newPosts;
+    }
 }
 
 

@@ -1,15 +1,16 @@
 package com.gongdel.webservice.domain.posts;
 
 import com.gongdel.webservice.domain.BaseTimeEntity;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
+/*
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+*/
 @Getter
+@Setter
 @Entity
 public class Posts extends BaseTimeEntity {
 
@@ -32,6 +33,7 @@ public class Posts extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private PostStatus status;
 
+    // 등록
     @Builder
     public Posts(String title, String content, String author, PostStatus status) {
         this.title = title;
@@ -39,4 +41,5 @@ public class Posts extends BaseTimeEntity {
         this.author = author;
         this.status = status;
     }
+
 }

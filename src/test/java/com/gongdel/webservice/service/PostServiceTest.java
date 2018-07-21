@@ -83,4 +83,31 @@ public class PostServiceTest {
         assertThat(testPost.getContent()).isEqualTo("테스트");
 
     }
+
+    @Test
+    public void Dto데이터_변경() {
+        // given
+        PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
+                .author("gongdel@gmail.com")
+                .content("테스트")
+                .title("테스트 타이틀")
+                .build();
+        Long id = postsService.save(dto);
+        Posts newPosts = new Posts();
+        newPosts.setTitle("수정제목");
+        newPosts.setContent("수정내용");
+        newPosts.setCode("수정코드");
+        newPosts.setStatus(PostStatus.Y);
+
+        // when
+        postsService.updatePost(id, newPosts);
+
+        // then
+        Posts posts = postsRepository.findOne(id);
+        assertThat(posts.getContent()).isEqualTo(newPosts.getContent());
+        assertThat(posts.getStatus()).isEqualTo(PostStatus.Y);
+        assertThat(posts.getTitle()).isEqualTo(newPosts.getTitle());
+        assertThat(posts.getCode()).isEqualTo(newPosts.getCode());
+
+    }
 }
