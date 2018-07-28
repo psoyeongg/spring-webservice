@@ -25,6 +25,8 @@ public class PostController {
             throw new NotFoundException("Not Found - " + id);
         }
 
+        model.addAttribute("post", post);
+        return "post/post";
     }
 
 }

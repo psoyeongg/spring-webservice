@@ -35,10 +35,11 @@ public class Posts extends BaseTimeEntity {
 
     // 등록
     @Builder
-    public Posts(String title, String content, String author, PostStatus status) {
+    public Posts(String title, String content, String author, String code, PostStatus status) {
         this.title = title;
         this.content = content;
         this.author = author;
+        this.code = code;
         this.status = status;
     }
 
