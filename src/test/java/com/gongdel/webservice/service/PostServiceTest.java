@@ -39,13 +39,14 @@ public class PostServiceTest {
                 .author("gongdel@gmail.com")
                 .content("테스트")
                 .title("테스트 타이틀")
+                .code("마크업")
                 .build();
 
         // when
-        postsService.save(dto);
+       Posts posts = postsService.save(dto);
 
         // then
-        Posts posts = postsRepository.findAll().get(0);
+        //Posts posts = postsRepository.findAll().get(0);
         assertThat(posts.getAuthor()).isEqualTo(dto.getAuthor());
         assertThat(posts.getContent()).isEqualTo(dto.getContent());
         assertThat(posts.getStatus()).isEqualTo(PostStatus.Y);
@@ -73,7 +74,8 @@ public class PostServiceTest {
                 .content("테스트")
                 .title("테스트 타이틀")
                 .build();
-        Long id = postsService.save(dto);
+        Posts givenPosts = Posts.builder().title("제목").content("테스트내용").author("gongdel").code("마크다운").status(PostStatus.Y).build();
+        Long id = postsService.save(dto).getId();
 
         // when
         PostsDetailsResponseDto testPost =  postsService.findByPost(id, PostStatus.Y);
@@ -92,7 +94,7 @@ public class PostServiceTest {
                 .content("테스트")
                 .title("테스트 타이틀")
                 .build();
-        Long id = postsService.save(dto);
+        Long id = postsService.save(dto).getId();
         Posts newPosts = new Posts();
         newPosts.setTitle("수정제목");
         newPosts.setContent("수정내용");

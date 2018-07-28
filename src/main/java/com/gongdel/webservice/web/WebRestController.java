@@ -47,7 +47,7 @@ public class WebRestController {
 
     @PostMapping("/posts")
     public Long savePosts(@RequestBody PostsSaveRequestDto dto) {
-        return postsService.save(dto);
+        return postsService.save(dto).getId();
     }
 
     @GetMapping("/profile")

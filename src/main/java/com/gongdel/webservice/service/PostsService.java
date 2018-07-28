@@ -22,8 +22,8 @@ public class PostsService {
     private PostsRepository postsRepository;
 
 
-    public Long save(PostsSaveRequestDto dto) {
-        return postsRepository.save(dto.toEntity()).getId();
+    public Posts save(PostsSaveRequestDto dto) {
+        return postsRepository.save(dto.toEntity());
     }
 
     /**
