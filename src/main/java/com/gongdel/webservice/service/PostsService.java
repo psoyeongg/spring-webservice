@@ -65,6 +65,14 @@ public class PostsService {
 
         return newPosts;
     }
+
+    public void deletePost(Long id) {
+        Posts oldPosts = postsRepository.findByIdAndStatus(id, PostStatus.Y);
+        if (oldPosts == null) {
+            throw new NotFoundException("Not Found - " + id);
+        }
+        oldPosts.setStatus(PostStatus.N);
+    }
 }
 
 
