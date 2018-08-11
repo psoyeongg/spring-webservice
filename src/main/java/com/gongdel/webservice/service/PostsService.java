@@ -51,15 +51,17 @@ public class PostsService {
     }
 
     // 글 업데이트 하기
-    public PostsDetailsResponseDto updatePost(Long id, Posts posts) {
+    public PostsDetailsResponseDto updatePost(Long id, PostsSaveRequestDto dto) {
         Posts oldPosts = postsRepository.findByIdAndStatus(id, PostStatus.Y);
         if (oldPosts == null) {
             throw new NotFoundException("Not Found - " + id);
         }
 
-        oldPosts.setContent(posts.getContent());
-        oldPosts.setCode(posts.getCode());
-        oldPosts.setTitle(posts.getTitle());
+        Posts updatePost = dto.toEntity();
+
+        oldPosts.setContent(updatePost.getContent());
+        oldPosts.setCode(updatePost.getCode());
+        oldPosts.setTitle(updatePost.getTitle());
 
         PostsDetailsResponseDto newPosts = new PostsDetailsResponseDto(oldPosts);
 

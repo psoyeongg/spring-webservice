@@ -95,21 +95,26 @@ public class PostServiceTest {
                 .title("테스트 타이틀")
                 .build();
         Long id = postsService.save(dto).getId();
-        Posts newPosts = new Posts();
+        /*Posts newPosts = new Posts();
         newPosts.setTitle("수정제목");
         newPosts.setContent("수정내용");
         newPosts.setCode("수정코드");
-        newPosts.setStatus(PostStatus.Y);
+        newPosts.setStatus(PostStatus.Y);*/
+        PostsSaveRequestDto updateDto = PostsSaveRequestDto.builder()
+                .author("gongdelupdate@gmail.com")
+                .content("테스트 update")
+                .title("테스트 타이틀 update")
+                .build();
 
         // when
-        postsService.updatePost(id, newPosts);
+        postsService.updatePost(id, updateDto);
 
         // then
         Posts posts = postsRepository.findOne(id);
-        assertThat(posts.getContent()).isEqualTo(newPosts.getContent());
+        assertThat(posts.getContent()).isEqualTo(updateDto.getContent());
         assertThat(posts.getStatus()).isEqualTo(PostStatus.Y);
-        assertThat(posts.getTitle()).isEqualTo(newPosts.getTitle());
-        assertThat(posts.getCode()).isEqualTo(newPosts.getCode());
+        assertThat(posts.getTitle()).isEqualTo(updateDto.getTitle());
+        assertThat(posts.getCode()).isEqualTo(updateDto.getCode());
 
     }
 }

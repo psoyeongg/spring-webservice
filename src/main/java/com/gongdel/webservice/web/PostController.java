@@ -27,6 +27,7 @@ public class PostController {
         return "post/new";
     }
 
+    // 등록
     @PostMapping("/new")
     public String newPostPost(@ModelAttribute("postDto") @Valid PostsSaveRequestDto postsSaveRequestDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -51,6 +52,7 @@ public class PostController {
         return "post/post";
     }
 
+    // 수정 페이지
     @GetMapping("/edit/{id}")
     public String getEditPost(@PathVariable Long id, Model model) {
         PostsDetailsResponseDto post = postsService.findByPost(id, PostStatus.Y);
@@ -60,5 +62,24 @@ public class PostController {
 
         model.addAttribute("editPost", post);
         return "post/edit";
+    }
+
+    // 수정
+    @PostMapping("{id}/edit")
+    public String modifyPost(@PathVariable Long id, @ModelAttribute("editPost") @Valid PostsSaveRequestDto createPost, BindingResult result) {
+        if (result.hasErrors()) {
+            return "post/edit";
+        }
+
+        postsService.updatePost(id, createPost);
+
+        return "redirect:/posts/" + id;
+
+    }
+
+    @PostMapping("{id}/delete")
+    public String deletePost(@PathVariable Long id) {
+        postsService.deletePost(id);
+        return "redirect:/#/";
     }
 }
