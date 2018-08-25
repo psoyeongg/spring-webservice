@@ -1,9 +1,12 @@
 package com.gongdel.webservice.domain.posts;
 
 import com.gongdel.webservice.domain.BaseTimeEntity;
+import com.gongdel.webservice.domain.category.Category;
+import com.gongdel.webservice.domain.comment.Comment;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 /*
@@ -32,6 +35,13 @@ public class Posts extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")
+    private Category category;
+
+    @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY)
+    private List<Comment> comments;
 
     // 등록
     @Builder
