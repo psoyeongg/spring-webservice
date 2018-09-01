@@ -1,5 +1,6 @@
 package com.gongdel.webservice.domain.category;
 
+import com.gongdel.webservice.domain.BaseTimeEntity;
 import com.gongdel.webservice.domain.posts.Posts;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,15 +13,13 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Category {
+public class Category extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
     private Long id;
 
     private String name;
-
-    private LocalDateTime regDate;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Posts> post = new ArrayList<>();

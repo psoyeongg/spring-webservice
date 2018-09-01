@@ -1,5 +1,6 @@
 package com.gongdel.webservice.domain.comment;
 
+import com.gongdel.webservice.domain.BaseTimeEntity;
 import com.gongdel.webservice.domain.posts.Posts;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Setter
 @Getter
-public class Comment {
+public class Comment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
