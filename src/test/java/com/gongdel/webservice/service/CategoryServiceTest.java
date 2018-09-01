@@ -71,18 +71,23 @@ public class CategoryServiceTest {
 
     }
 
+
     @Test
     public void Dto데이터_변경() {
         // given
-        Category category = categoryService.findOne(1L);
-        category.setName("업데이트 확인");
+        Category category = new Category();
+        category.setName("gongdel");
+        long id = categoryService.createCategory(category).getId();
+        Category category1 = new Category();
+        category1.setName("gongdelUpdate");
+        category1.setId(id);
 
         // when
-        categoryService.updateCategory(category);
+        categoryService.updateCategory(category1);
 
         // then
-        Category category1 = categoryService.findOne(1L);
-        assertThat(category1.getName()).isEqualTo(category.getName());
+        Category newCategory = categoryService.findOne(1L);
+        assertThat(newCategory.getName()).isEqualTo(category1.getName());
 
     }
 }
