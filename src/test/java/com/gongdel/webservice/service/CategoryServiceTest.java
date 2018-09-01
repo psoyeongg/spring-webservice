@@ -86,7 +86,7 @@ public class CategoryServiceTest {
         categoryService.updateCategory(category1);
 
         // then
-        Category newCategory = categoryService.findOne(1L);
+        Category newCategory = categoryService.findOne(id);
         assertThat(newCategory.getName()).isEqualTo(category1.getName());
 
     }
