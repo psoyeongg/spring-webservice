@@ -2,6 +2,7 @@ package com.gongdel.webservice.service;
 
 import com.gongdel.webservice.domain.category.Category;
 import com.gongdel.webservice.domain.comment.CategoryRepository;
+import com.gongdel.webservice.dto.category.CategoryRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +18,8 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public Category createCategory (Category category) {
-        return categoryRepository.save(category);
+    public Category createCategory (CategoryRequestDto categoryRequestDto) {
+        return categoryRepository.save(categoryRequestDto.toEntity());
     }
 
     @Transactional(readOnly = true)
@@ -39,11 +40,11 @@ public class CategoryService {
         categoryRepository.delete(id);
     }
 
-    public void updateCategory(Category category) {
-        Category oldCategory = categoryRepository.findOne(category.getId());
+    public void updateCategory(CategoryRequestDto categoryRequestDto) {
+        Category oldCategory = categoryRepository.findOne(categoryRequestDto.getId());
 
         if (oldCategory != null) {
-            oldCategory.setName(category.getName());
+            oldCategory.setName(categoryRequestDto.getName());
         }
     }
 }
