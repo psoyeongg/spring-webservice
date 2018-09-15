@@ -1,6 +1,5 @@
-package com.gongdel.webservice.domain.comment;
+package com.gongdel.webservice.domain.category;
 
-import com.gongdel.webservice.domain.category.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {

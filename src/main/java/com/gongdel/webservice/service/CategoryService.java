@@ -1,7 +1,7 @@
 package com.gongdel.webservice.service;
 
 import com.gongdel.webservice.domain.category.Category;
-import com.gongdel.webservice.domain.comment.CategoryRepository;
+import com.gongdel.webservice.domain.category.CategoryRepository;
 import com.gongdel.webservice.dto.category.CategoryRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

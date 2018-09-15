@@ -1,7 +1,8 @@
 package com.gongdel.webservice.service;
 
 import com.gongdel.webservice.domain.category.Category;
-import com.gongdel.webservice.domain.comment.CategoryRepository;
+import com.gongdel.webservice.domain.category.CategoryRepository;
+import com.gongdel.webservice.dto.category.CategoryRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,14 +33,17 @@ public class CategoryServiceTest {
     @Test
     public void Dto데이터가_category테이블에_저장된다() {
         // given
-        Category category = new Category();
-        category.setName("gongdel");
+        CategoryRequestDto categoryRequestDto = CategoryRequestDto.builder()
+                .id(1L)
+                .name("카테고리테스트")
+                .build();
+
 
         // when
-        Category category1 = categoryService.createCategory(category);
+        Category category = categoryService.createCategory(categoryRequestDto);
 
         // then
-        assertThat(category.getName()).isEqualTo(category1.getName());
+        assertThat(category.getName()).isEqualTo(category.getName());
     }
 
     @Test
@@ -58,16 +62,18 @@ public class CategoryServiceTest {
     @Test
     public void Dto데이터_특정id조회() {
         // given
-        Category category = new Category();
-        category.setName("gongdel");
-        long id = categoryService.createCategory(category).getId();
+        CategoryRequestDto categoryRequestDto = CategoryRequestDto.builder()
+                .id(1L)
+                .name("카테고리테스트")
+                .build();
+        long id = categoryService.createCategory(categoryRequestDto).getId();
 
         // when
         Category entity = categoryService.findOne(id);
 
         // then
         assertThat(entity.getId()).isEqualTo(id);
-        assertThat(entity.getName()).isEqualTo(category.getName());
+        assertThat(entity.getName()).isEqualTo(categoryRequestDto.getName());
 
     }
 
@@ -75,19 +81,24 @@ public class CategoryServiceTest {
     @Test
     public void Dto데이터_변경() {
         // given
-        Category category = new Category();
-        category.setName("gongdel");
-        long id = categoryService.createCategory(category).getId();
-        Category category1 = new Category();
-        category1.setName("gongdelUpdate");
-        category1.setId(id);
+        CategoryRequestDto categoryRequestDto = CategoryRequestDto.builder()
+                .id(1L)
+                .name("카테고리테스트")
+                .build();
+        long id = categoryService.createCategory(categoryRequestDto).getId();
+
+        CategoryRequestDto categoryRequestDtoUpdate = CategoryRequestDto.builder()
+                .id(id)
+                .name("카테고리테스트update")
+                .build();
+
 
         // when
-        categoryService.updateCategory(category1);
+        categoryService.updateCategory(categoryRequestDtoUpdate);
 
         // then
         Category newCategory = categoryService.findOne(id);
-        assertThat(newCategory.getName()).isEqualTo(category1.getName());
+        assertThat(newCategory.getName()).isEqualTo(categoryRequestDtoUpdate.getName());
 
     }
 }
