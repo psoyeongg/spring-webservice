@@ -126,6 +126,7 @@ public class PostControllerTest {
                 .author("gongdel@gmail.com")
                 .content("테스트")
                 .title("테스트 타이틀")
+                .categoryId(1L)
                 .build();
         given(this.postsService.updatePost(anyLong(), anyObject())).willReturn(new PostsDetailsResponseDto(dto.toEntity()));
 
@@ -133,7 +134,9 @@ public class PostControllerTest {
         this.mvc.perform(post("/posts/{id}/edit", 1)
                 .param("author", "gongdel@gmail.com")
                 .param("content", "테스트")
-                .param("title", "테스트 타이틀"))
+                .param("title", "테스트 타이틀")
+                .param("categoryId", "1")
+                 )
                 .andExpect(status().isFound())
                 /**
                  * 302 Found이 응답 코드는 요청한 리소스의 URI가 일시적으로 변경되었음을 의미합니다. 새롭게 변경된 URI는 나중에 만들어질 수 있습니다. 그러므로, 클라이언트는 향후의 요청도 반드시 동일한 URI로 해야합니다.

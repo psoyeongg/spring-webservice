@@ -36,9 +36,10 @@ public class Posts extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private PostStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
+
 
     @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY)
     private List<Comment> comments;

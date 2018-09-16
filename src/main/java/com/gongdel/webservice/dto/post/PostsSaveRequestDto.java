@@ -29,11 +29,13 @@ public class PostsSaveRequestDto {
     private  String categoryName;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, String code) {
+    public PostsSaveRequestDto(String title, String content, String author, String code, Long categoryId) {
         this.title = title;
         this.content = content;
         this.author = author;
         this.code = code;
+        this.categoryId = categoryId;
+
     }
 
     public Posts toEntity() {
