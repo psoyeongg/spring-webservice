@@ -22,4 +22,9 @@ public class WebController {
 
         return "main";
     }
+
+    @GetMapping("/main")
+    public String home(Model model) {
+        return "index";
+    }
 }
