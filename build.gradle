@@ -32,8 +32,11 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.2.15'
+	//compile 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.2.15'
 	compile("org.mariadb.jdbc:mariadb-java-client")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile ("io.github.jpenren:thymeleaf-spring-data-dialect:3.1.1")
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '2.1.0.RELEASE'
 	runtime('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testCompile "org.mockito:mockito-core:2.+"
