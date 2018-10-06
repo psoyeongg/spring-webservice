@@ -1,3 +1,4 @@
+/*
 package com.gongdel.webservice.controller;
 
 import org.junit.Test;
@@ -26,3 +27,4 @@ public class WebControllerTest {
         assertThat(body).contains("스프링부트로 시작하는 웹 서비스"); // main.hbs에 포함된 코드들이 있는지 확인
     }
 }
+*/
