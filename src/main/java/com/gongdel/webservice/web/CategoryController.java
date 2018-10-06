@@ -16,21 +16,27 @@ import javax.validation.Valid;
 @RequestMapping("/categories")
 public class CategoryController {
 
-    private CategoryService categoryService;
+    /**
+        주의 !!
+     @RequiredArgsConstructor는 final이나 @NonNull인 필드값만 파라미터로 받는 생성자를 만들어 준다.
+     http://www.daleseo.com/lombok-popular-annotations/
+     **/
+    private final CategoryService categoryService;
 
     @GetMapping
     public String categories(Pageable pageable, Model model) {
+        System.out.println(categoryService.findAll());
         model.addAttribute("categories", categoryService.findAll(pageable));
         return "category/list";
     }
 
     // 등록
     @GetMapping("/new")
-    public String newCategory(@ModelAttribute CategoryRequestDto dto) {
+    public String newCategory(@ModelAttribute(name = "categoryDto") CategoryRequestDto dto) {
         return "category/new";
     }
     @PostMapping("/new")
-    public String createCategory(@ModelAttribute @Valid CategoryRequestDto categoryRequestDto, BindingResult result) {
+    public String createCategory(@ModelAttribute(name = "categoryDto") @Valid CategoryRequestDto categoryRequestDto, BindingResult result) {
         if (result.hasErrors()) {
             return "category/new";
         }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>카테고</title>
+</head>
+<body>
+<!-- Main Content -->
+<div class="container" layout:fragment="content">
+    <form class="form-horizontal well bs-component col-lg-10 col-lg-offset-1"
+          th:action="@{/categories/new}" th:object="${categoryDto}" method="post" th:id="category">
+        <fieldset>
+            <!-- 'name' field가 에러를 가지고 있다면 'has-error' 클래스를 추가해라
+                https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
+            -->
+            <div class="form-group" th:classappend="(${#fields.hasErrors('name')}? ' has-error')">
+                <label for="name" class="col-lg-2 control-lable">카테고리 명</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+                           placeholder="Title" />
+                    <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+
+    </form>
+</div>
+</body>
+</html>
