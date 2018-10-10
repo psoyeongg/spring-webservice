@@ -51,7 +51,7 @@ public class CategoryController {
         return "category/edit";
     }
     @PostMapping("/{id}/edit")
-    public String modifyCategory(@PathVariable Long id, @ModelAttribute CategoryRequestDto categoryRequestDto,
+    public String modifyCategory(@PathVariable Long id, @ModelAttribute(name = "categoryDto") CategoryRequestDto categoryRequestDto,
                                  BindingResult result) {
         if (result.hasErrors()) {
             return "category/edit";
