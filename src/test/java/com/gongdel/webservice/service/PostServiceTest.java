@@ -32,16 +32,16 @@ public class PostServiceTest {
     @Autowired
     private PostsRepository postsRepository;
 
-    @Before
+ /*   @Before
     public void create_참조하는category() {
-        CategoryRequestDto dto =
+        CategoryRequestDto categoryRequestDto =
                 CategoryRequestDto.builder()
                         .id(1L)
                         .name("spring")
                 .build();
 
-        categoryService.createCategory(dto);
-    }
+        categoryService.createCategory(categoryRequestDto);
+    }*/
     @After
     public void cleanup() {
         postsRepository.deleteAll();
@@ -50,6 +50,13 @@ public class PostServiceTest {
     @Test
     public void Dto데이터가_posts테이블에_저장된다() {
         // given
+        CategoryRequestDto categoryRequestDto =
+                CategoryRequestDto.builder()
+                        .id(1L)
+                        .name("spring")
+                        .build();
+
+        categoryService.createCategory(categoryRequestDto);
         PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
                 .author("gongdel@gmail.com")
                 .content("테스트")
@@ -85,6 +92,13 @@ public class PostServiceTest {
     @Test
     public void Dto데이터_특정id조회() {
         // given
+        CategoryRequestDto categoryRequestDto =
+                CategoryRequestDto.builder()
+                        .id(1L)
+                        .name("spring")
+                        .build();
+
+        categoryService.createCategory(categoryRequestDto);
         PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
                 .author("gongdel@gmail.com")
                 .content("테스트")
@@ -106,6 +120,13 @@ public class PostServiceTest {
     @Test
     public void Dto데이터_변경() {
         // given
+        CategoryRequestDto categoryRequestDto =
+                CategoryRequestDto.builder()
+                        .id(1L)
+                        .name("spring")
+                        .build();
+
+        categoryService.createCategory(categoryRequestDto);
         PostsSaveRequestDto dto = PostsSaveRequestDto.builder()
                 .author("gongdel@gmail.com")
                 .content("테스트")
