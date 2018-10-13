@@ -3,10 +3,12 @@ package com.gongdel.webservice.service;
 import com.gongdel.webservice.domain.posts.PostStatus;
 import com.gongdel.webservice.domain.posts.Posts;
 import com.gongdel.webservice.domain.posts.PostsRepository;
+import com.gongdel.webservice.dto.category.CategoryRequestDto;
 import com.gongdel.webservice.dto.post.PostsDetailsResponseDto;
 import com.gongdel.webservice.dto.post.PostsMainResponseDto;
 import com.gongdel.webservice.dto.post.PostsSaveRequestDto;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,21 @@ public class PostServiceTest {
     private PostsService postsService;
 
     @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
     private PostsRepository postsRepository;
 
+    @Before
+    public void create_참조하는category() {
+        CategoryRequestDto dto =
+                CategoryRequestDto.builder()
+                        .id(1L)
+                        .name("spring")
+                .build();
+
+        categoryService.createCategory(dto);
+    }
     @After
     public void cleanup() {
         postsRepository.deleteAll();
@@ -40,6 +55,7 @@ public class PostServiceTest {
                 .content("테스트")
                 .title("테스트 타이틀")
                 .code("마크업")
+                .categoryId(1L)
                 .build();
 
         // when
@@ -73,6 +89,7 @@ public class PostServiceTest {
                 .author("gongdel@gmail.com")
                 .content("테스트")
                 .title("테스트 타이틀")
+                .categoryId(1L)
                 .build();
         Posts givenPosts = Posts.builder().title("제목").content("테스트내용").author("gongdel").code("마크다운").status(PostStatus.Y).build();
         Long id = postsService.save(dto).getId();
@@ -93,6 +110,7 @@ public class PostServiceTest {
                 .author("gongdel@gmail.com")
                 .content("테스트")
                 .title("테스트 타이틀")
+                .categoryId(1L)
                 .build();
         Long id = postsService.save(dto).getId();
         /*Posts newPosts = new Posts();
