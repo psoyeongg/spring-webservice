@@ -25,7 +25,7 @@ public class Category extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Posts> post = new ArrayList<>();
-
+    
     @Builder
     public Category(Long id, String name) {
         this.id = id;

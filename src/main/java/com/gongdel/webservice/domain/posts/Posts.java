@@ -36,7 +36,7 @@ public class Posts extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private PostStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY/*, cascade = {CascadeType.ALL}*/) // All하면 에러: https://stackoverflow.com/questions/23645091/spring-data-jpa-and-hibernate-detached-entity-passed-to-persist-on-manytomany-re
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
