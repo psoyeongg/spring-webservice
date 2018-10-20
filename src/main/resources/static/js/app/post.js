@@ -69,12 +69,6 @@ var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
 
 editor.on('change', update);
 
-
-function saveAsHtml() {
-    document.getElementById('content').value = document.getElementById('out').innerHTML;
-    document.getElementById('post').submit();
-}
-
 function updateHash() {
     window.location.hash = btoa( // base64 so url-safe
         RawDeflate.deflate( // gzip
@@ -108,7 +102,18 @@ if (window.location.hash) {
     editor.focus();
 }
 
-//
+// 포스트 등록
+function saveAsHtml() {
+    document.getElementById('content').value = document.getElementById('out').innerHTML;
+    document.getElementById('post').submit();
+}
+// 카테고리 값 삽입
 function changeCategory(name){
     document.getElementById("categoryName").value = name;
+}
+
+// Comment 삭제
+function deleteComment(postId, commentId) {
+    document.getElementById("deleteComment").action = "/comment/" + postid + "/" + commentId;
+    document.getElementById("deleteComment").submit();
 }

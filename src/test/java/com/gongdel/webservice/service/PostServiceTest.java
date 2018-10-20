@@ -92,7 +92,6 @@ public class PostServiceTest {
                 .title("테스트 타이틀")
                 .categoryId(1L)
                 .build();
-        Posts givenPosts = Posts.builder().title("제목").content("테스트내용").author("gongdel").code("마크다운").status(PostStatus.Y).build();
         Long id = postsService.save(dto).getId();
 
         // when

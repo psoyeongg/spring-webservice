@@ -3,6 +3,7 @@ package com.gongdel.webservice.web;
 import com.gongdel.webservice.domain.category.Category;
 import com.gongdel.webservice.domain.posts.PostStatus;
 import com.gongdel.webservice.domain.posts.Posts;
+import com.gongdel.webservice.dto.comment.CommentRequestDto;
 import com.gongdel.webservice.dto.post.PostsDetailsResponseDto;
 import com.gongdel.webservice.dto.post.PostsSaveRequestDto;
 import com.gongdel.webservice.exception.NotFoundException;
@@ -51,7 +52,7 @@ public class PostController {
 
     // 특정 posts 검색
     @GetMapping("/{id}")
-    public String findByPost(@PathVariable Long id, Model model) {
+    public String findByPost(@PathVariable Long id, Model model, @ModelAttribute(name = "commentDto") CommentRequestDto commentRequestDto) {
         PostsDetailsResponseDto post = postsService.findByPost(id, PostStatus.Y);
         if (post == null) {
             throw new NotFoundException("Not Found - " + id);
