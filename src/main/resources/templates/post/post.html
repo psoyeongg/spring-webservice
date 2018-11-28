@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <span style="top: 18px;"
-                                  th:onclick="'deleteComment(\'' + ${comment.post.id} + '\', \'' + ${comment.id} + '\');'"
+                                  th:onclick="'deleteComment(\'' + ${comment.posts.id} + '\', \'' + ${comment.id} + '\');'"
                                   class="glyphicon glyphicon-remove"></span>
                             <p class="well" th:text="${comment.content}">This is really awesome snippet!</p>
                         </div>

@@ -4,6 +4,7 @@ import com.gongdel.webservice.domain.BaseTimeEntity;
 import com.gongdel.webservice.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class Comment extends BaseTimeEntity {
 
     @Id
