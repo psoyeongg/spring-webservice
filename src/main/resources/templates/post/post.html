@@ -10,6 +10,12 @@
     <meta name="author" content=""></meta>
     <title>포스트</title>
     <link rel="stylesheet" th:href="@{/markdown/css/github-gist.css}"></link>
+    <script type="text/javascript" th:inline="javascript">
+        function deleteComment(postId, commentId){
+            document.getElementById("deleteComment").action = "/comments/"+postId + "/" + commentId;
+            document.getElementById("deleteComment").submit();
+        }
+    </script>
 </head>
 
 <body>
