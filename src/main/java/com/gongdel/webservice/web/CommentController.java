@@ -1,5 +1,7 @@
 package com.gongdel.webservice.web;
 
+import com.gongdel.webservice.domain.posts.Posts;
+import com.gongdel.webservice.domain.posts.PostsRepository;
 import com.gongdel.webservice.dto.comment.CommentRequestDto;
 import com.gongdel.webservice.service.CommentService;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,13 @@ import javax.validation.Valid;
 public class CommentController {
 
     private final CommentService commentService;
+    private final PostsRepository postsRepository;
+
+    @ModelAttribute
+    public void post(Model model, @ModelAttribute("commentDto") CommentRequestDto commentRequestDto) {
+        Posts posts = postsRepository.findOne(commentRequestDto.getPostId());
+        model.addAttribute("post", posts);
+    }
 
     @PostMapping
     public String createComment(@ModelAttribute("commentDto" ) @Valid CommentRequestDto commentRequestDto
