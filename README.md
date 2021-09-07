@@ -12,3 +12,5 @@ Spring Boot & JPA 사용 웹서비스 출시 해보기[![Build Status](https://t
 + Travis
 + BootStrap
 + Thymleaf
+
+테스트 공호진
